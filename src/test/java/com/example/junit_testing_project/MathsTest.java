@@ -61,6 +61,7 @@ class MathsTest {
         assertNotEquals(8 , num);
     }
 
+    //happy part
     @Test
     @DisplayName("sub() should work since the expected number is correct")
     public void subShouldWork() {
@@ -74,6 +75,7 @@ class MathsTest {
         assertEquals(10 , num);
     }
 
+    //unhappy part
     @Test
     @DisplayName("sub() should not work since the expected number isn't correct")
     public void subShouldNotWork() {
@@ -97,6 +99,7 @@ class MathsTest {
 
     @ParameterizedTest
     @CsvSource({"3 ,5"})
+    @DisplayName("multiply() should not work since the the expected number is correct")
     public void multiplyShouldNotWork(int p1 , int p2) {
         int num = maths.multiply(p1 , p2);
         assertNotEquals(25 , num);
@@ -104,6 +107,7 @@ class MathsTest {
 
     @ParameterizedTest
     @CsvSource({"20 , 5"})
+    @DisplayName("divide() should work since the the expected number is correct")
     public void divideShouldWork(int p1 , int p2) {
         int num = maths.divide(p1 , p2);
         assertEquals(4 , num);
@@ -111,6 +115,7 @@ class MathsTest {
 
     @ParameterizedTest
     @CsvSource({"20 , 5"})
+    @DisplayName("divide() should not work since the the expected number is correct")
     public void divideShouldNotWork(int p1 , int p2) {
         int num = maths.divide(p1 , p2);
         assertNotEquals(50 , num);
