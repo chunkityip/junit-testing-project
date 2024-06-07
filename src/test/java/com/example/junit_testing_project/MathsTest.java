@@ -13,114 +13,90 @@ class MathsTest {
 
     @BeforeAll
     public static void setBeforeAllTest() {
-        System.out.println("Test begin to start....");
+        System.out.println("Test begin:");
     }
 
     @AfterAll
     public static void setAfterAllTest() {
-        System.out.println("Test begin to exit....");
+        System.out.println("Test finish");
     }
 
     @BeforeEach
     public void setUp() {
         maths = new Maths();
-        System.out.println("Test case starting.....");
+        System.out.println("Test case begin");
     }
 
     @AfterEach
     public void tearDown() {
-        maths = null;
-        System.out.println("Test cast exiting......");
-    }
-
-    //happy part
-    @Test
-    @DisplayName("add() should work since the expected number is correct")
-    public void addShouldWork() {
-        //Given
-        int p1 = 3 , p2 = 10;
-
-        //When
-        int num = maths.add(p1 , p2);
-
-        //Then
-        assertEquals(13 , num);
-    }
-
-    //unhappy part
-    @Test
-    @DisplayName("add() shouldn't work since the expected number isn't correct")
-    public void addShouldNotWork() {
-        //Given
-        int p1 = 3 , p2 = 10;
-
-        //When
-        int num = maths.add(p1 , p2);
-
-        //Then
-        assertNotEquals(8 , num);
-    }
-
-    //happy part
-    @Test
-    @DisplayName("sub() should work since the expected number is correct")
-    public void subShouldWork() {
-        //Given
-        int p1 = 15 , p2 = 5;
-
-        //When
-        int num = maths.sub(p1 , p2);
-
-        //Then
-        assertEquals(10 , num);
-    }
-
-    //unhappy part
-    @Test
-    @DisplayName("sub() should not work since the expected number isn't correct")
-    public void subShouldNotWork() {
-        //Given
-        int p1 = 15 , p2 = 5;
-
-        //When
-        int num = maths.sub(p1 , p2);
-
-        //Then
-        assertNotEquals(20 , num);
+        System.out.println("Test case end");
     }
 
     @ParameterizedTest
-    @CsvSource({"3, 5"})
-    @DisplayName("multiply() should work since the the expected number is correct")
-    public void multiplyShouldWork(int p1 , int p2) {
-        int num = maths.multiply(p1 , p2);
-        assertEquals(15 , num);
+    @CsvSource({
+            "3, 5",
+            "10, 20",
+            "7, 8"
+    })
+    @DisplayName("Testing add() with different arguments")
+    public void addMethodShouldPass(int p1, int p2) {
+        int result = maths.add(p1, p2);
+
+        //happy part
+        assertEquals(p1 + p2, result, "Sum should match");
+
+        //Unhappy part
+        assertNotEquals(p1 * p2, result, "Sum should not match product");
     }
 
     @ParameterizedTest
-    @CsvSource({"3 ,5"})
-    @DisplayName("multiply() should not work since the the expected number is correct")
-    public void multiplyShouldNotWork(int p1 , int p2) {
-        int num = maths.multiply(p1 , p2);
-        assertNotEquals(25 , num);
+    @CsvSource({
+            "3 , 5",
+            "7 , 15",
+            "10 , 20"
+    })
+    @DisplayName("Testing sub() with different arguments")
+    public void subMethodShouldPass(int p1 , int p2) {
+        int result = maths.sub(p1 , p2);
+
+        //happy part
+        assertEquals(p1 - p2 , result);
+
+        //Unhappy part
+        assertNotEquals(p1 + p2 , result);
     }
 
     @ParameterizedTest
-    @CsvSource({"20 , 5"})
-    @DisplayName("divide() should work since the the expected number is correct")
-    public void divideShouldWork(int p1 , int p2) {
-        int num = maths.divide(p1 , p2);
-        assertEquals(4 , num);
+    @CsvSource({
+            "5 , 10",
+            "15 , 20",
+            "8 , 10"
+    })
+    public void multiplyShouldPass(int p1 , int p2) {
+        int result = maths.multiply(p1 , p2);
+
+        //happy part
+        assertEquals(p1 * p2 , result);
+
+        //Unhappy part
+        assertNotEquals(p1 / p2 , result);
     }
 
     @ParameterizedTest
-    @CsvSource({"20 , 5"})
-    @DisplayName("divide() should not work since the the expected number is correct")
-    public void divideShouldNotWork(int p1 , int p2) {
-        int num = maths.divide(p1 , p2);
-        assertNotEquals(50 , num);
+    @CsvSource({
+            "50 , 10",
+            "10 , 5",
+            "2 , 4"
+    })
+    public void divideShouldPass(int p1 , int p2) {
+
+        int result = maths.divide(p1 , p2);
+
+        //Happy part
+        assertEquals(p1 / p2 , result);
+
+        //Unhappy part
+        assertNotEquals(p1 * p2 , result);
     }
-
-
 }
 
